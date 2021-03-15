@@ -42,7 +42,7 @@ setMethod("winScan", "data.frame", function(x,
 	
 	if(is.null(position)){
 		# Create mock position variable
-		x <- x %>% group_by_(.dots = groups) %>% mutate(pos = 1:n())
+		x <- x %>% group_by(.dots = groups) %>% mutate(pos = 1:n())
 	} else {
 		# Rename position variable for downstream functions
 		x <- rename_(x, "pos" = position)
@@ -54,7 +54,7 @@ setMethod("winScan", "data.frame", function(x,
 	
 	
 	### Compute window statistics per group ###
-	out = x %>% group_by_(.dots = groups) %>% 
+	out = x %>% group_by(.dots = groups) %>% 
 		do(.winSlider(., values, win_size, win_step, funs, cores)) %>%
 		as.data.frame()
 	
